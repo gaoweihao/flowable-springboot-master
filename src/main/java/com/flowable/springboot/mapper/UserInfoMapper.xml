@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flowable.springboot.dao.UserInfoDao">
+    <resultMap id="userInfoMap" type="com.flowable.springboot.bean.UserInfoEntity">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userCode" column="user_code"/>
+        <result property="password" column="password"/>
+    </resultMap>
+
+    <select id="findByUsername" parameterType="String" resultMap="userInfoMap">
+        select ID,USER_NAME FROM sys_user_info WHERE USER_NAME = #{userName}
+    </select>
+
+    <insert id="save" parameterType="com.flowable.springboot.bean.UserInfoEntity">
+        INSERT INTO sys_user_info(id,user_name,user_code,password)
+        VALUES(#{id},#{userName},#{userCode},#{password})
+    </insert>
+
+    <select id="findList" resultMap="userInfoMap">
+        SELECT id,user_name,user_code FROM sys_user_info
+    </select>
+
+    <select id="selectByUserId" parameterType="String" resultMap="userInfoMap">
+        select id,user_name,user_code FROM sys_user_info WHERE id = #{userId}
+    </select>
+
+    <select id="findByUserCode" parameterType="String" resultMap="userInfoMap">
+      SELECT user_id, user_name, user_code, password
+      FROM sys_user_info
+      WHERE user_code = #{userCode}
+    </select>
+
+</mapper>

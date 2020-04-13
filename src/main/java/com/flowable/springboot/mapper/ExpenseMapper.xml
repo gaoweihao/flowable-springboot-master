@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flowable.springboot.dao.ExpenseDao">
+    <resultMap id="expenseMap" type="com.flowable.springboot.bean.ExpenseEntity">
+        <id property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="type" column="type_" jdbcType="VARCHAR"/>
+        <result property="deptName" column="dept_name" jdbcType="VARCHAR"/>
+        <result property="reason" column="reason" jdbcType="VARCHAR"/>
+        <result property="sum" column="sum_" jdbcType="INTEGER"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="processState" column="process_state" jdbcType="INTEGER"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
+        <result property="processId" column="process_id" jdbcType="VARCHAR"/>
+        <result property="date" column="date_" jdbcType="INTEGER"/>
+        <result property="createDate" column="create_date" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="saveExpenseEntity" parameterType="com.flowable.springboot.bean.ExpenseEntity">
+        insert into EXPENSES
+          (ID,
+          TYPE_,
+          DEPT_NAME,
+          REASON,
+          SUM_,
+          STATE,
+          STATUS,
+          PROCESS_STATE,
+          USER_NAME,
+          USER_CODE,
+          PROCESS_ID,
+          DATE_,
+          CREATE_DATE
+          )
+          VALUES
+          (
+          #{id,jdbcType=VARCHAR},
+          #{type,jdbcType=VARCHAR},
+          #{deptName,jdbcType=VARCHAR},
+          #{reason,jdbcType=VARCHAR},
+          #{sum,jdbcType=INTEGER},
+          #{state,jdbcType=INTEGER},
+          #{status,jdbcType=INTEGER},
+          #{processState,jdbcType=INTEGER},
+          #{userName,jdbcType=VARCHAR},
+          #{userCode,jdbcType=VARCHAR},
+          #{processId,jdbcType=VARCHAR},
+          #{date,jdbcType=INTEGER},
+          #{createDate,jdbcType=INTEGER}
+          )
+    </insert>
+
+    <insert id="saveExpenseDetail" parameterType="com.flowable.springboot.bean.ExpenseDetail">
+        insert into EXPENSES_DETAIL
+          (
+          ID,
+          DESCRIPTION,
+          SUM_,
+          TYPE_,
+          COUNT_
+          )
+          VALUES
+          (
+          #{id,jdbcType=VARCHAR},
+          #{description,jdbcType=VARCHAR},
+          #{sum,jdbcType=INTEGER},
+          #{type,jdbcType=VARCHAR},
+          #{count,jdbcType=INTEGER}
+          )
+    </insert>
+
+    <select id="listExpenseByPageV2" resultMap="expenseMap">
+        select id,type_,dept_Name,reason,sum_,state, status,user_name,date_
+        from expenses
+        where state=0
+        <if test="userCode != null and userCode != ''">
+            and user_code=#{userCode}
+        </if>
+    </select>
+
+    <!--回调更改单据状态-->
+    <update id="updateState">
+        update EXPENSES set state=#{state} where id=#{businessKey}
+    </update>
+
+    <!--未提交页签查询-->
+    <select id="queryExpenses" resultMap="expenseMap">
+        select id,type_,dept_Name,reason,sum_,state, status,user_name,date_
+        from expenses
+        where id in
+        <foreach collection="ids" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        or (user_code=#{userCode} and state=0)
+        order by CREATE_DATE desc
+    </select>
+
+    <!--已提交、未审批、已审批页签查询-->
+    <select id="queryExpenses2" resultMap="expenseMap">
+        select id,type_,dept_Name,reason,sum_,state, status,user_name,date_
+        from expenses
+        where id in
+        <foreach collection="ids" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        order by CREATE_DATE desc
+    </select>
+
+
+</mapper>
