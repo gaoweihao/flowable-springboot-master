@@ -21,7 +21,7 @@ public class TaskStateQuery {
     private String menuId;
 
     //任务状态码(多个状态码之间用逗号分割) Y
-    private String state;
+    //private String state;
 
     public String getAppCode() {
         return appCode;
@@ -63,11 +63,11 @@ public class TaskStateQuery {
         this.menuId = menuId;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
+//    public String getState() {
+//        return state;
+//    }
+//
+//    public void setState(String state) {
+//        this.state = state;
+//    }
 }

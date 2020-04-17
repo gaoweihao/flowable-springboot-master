@@ -4,22 +4,17 @@ import com.alibaba.fastjson.JSON;
 import com.codingapi.txlcn.tc.annotation.DTXPropagation;
 import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import com.codingapi.txlcn.tc.annotation.TxTransaction;
-import com.flowable.springboot.bean.UserInfoEntity;
 import com.flowable.springboot.requestBean.*;
 import com.flowable.springboot.responseBean.BaseResponse;
+import com.flowable.springboot.responseBean.ProcTaskInfo;
 import com.flowable.springboot.service.FbpmService;
 import com.flowable.springboot.service.UserInfoService;
-import com.flowable.springboot.util.HttpUtil;
-import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.List;
 
 @Service("fbpmService")
 public class FbpmServiceImpl implements FbpmService {
@@ -80,7 +75,7 @@ public class FbpmServiceImpl implements FbpmService {
      */
     @Override
     @Transactional
-    @TxTransaction
+    @TxTransaction(propagation = DTXPropagation.REQUIRED)
     public BaseResponse batchProcessBack(String url, ProcessBackQuery processBack) {
         BaseResponse response = restTemplate.postForObject(url,JSON.toJSON(processBack),BaseResponse.class);
         return response;
@@ -95,7 +90,7 @@ public class FbpmServiceImpl implements FbpmService {
      */
     @Override
     @Transactional
-    @TxTransaction
+    @TxTransaction(propagation = DTXPropagation.REQUIRED)
     public BaseResponse batchProcessCancel(String url, ProcessCancelQuery processCancel) {
         BaseResponse response = restTemplate.postForObject(url,JSON.toJSON(processCancel),BaseResponse.class);
         return response;
@@ -110,9 +105,18 @@ public class FbpmServiceImpl implements FbpmService {
      */
     @Override
     @Transactional
-    @TxTransaction
+    @TxTransaction(propagation = DTXPropagation.SUPPORTS)
     public BaseResponse selectTaskListByState(String url, TaskStateQuery taskState) {
-        BaseResponse response = restTemplate.getForObject(url,BaseResponse.class,JSON.toJSON(taskState));
+        BaseResponse response = new BaseResponse();
+        url +="?userCode="+taskState.getAppCode()+
+                "&roleId="+taskState.getRoleId()+
+                "&bizTypeCode="+taskState.getBizTypeCode()+
+                "&appCode="+taskState.getAppCode()+
+                "&menuId="+taskState.getMenuId();
+        String json = restTemplate.getForObject(url,String.class);
+        List<ProcTaskInfo> procTaskInfo = (List<ProcTaskInfo>)JSON.parse(json);
+        response.setCode(200);
+        response.setData(procTaskInfo);
         return response;
     }
 
@@ -125,9 +129,17 @@ public class FbpmServiceImpl implements FbpmService {
      */
     @Override
     @Transactional
-    @TxTransaction
+    @TxTransaction(propagation = DTXPropagation.SUPPORTS)
     public BaseResponse selectTaskFinishList(String url, TaskFinishQuery taskFinish) {
-        BaseResponse response = restTemplate.postForObject(url,JSON.toJSON(taskFinish),BaseResponse.class);
+        BaseResponse response = new BaseResponse();
+        url +="?userCode="+taskFinish.getAppCode()+
+                "&bizTypeCode="+taskFinish.getBizTypeCode()+
+                "&appCode="+taskFinish.getAppCode()+
+                "&menuId="+taskFinish.getMenuId();
+        String json = restTemplate.getForObject(url,String.class);
+        List<ProcTaskInfo> procTaskInfo = (List<ProcTaskInfo>)JSON.parse(json);
+        response.setCode(200);
+        response.setData(procTaskInfo);
         return response;
     }
 }

@@ -1,8 +1,5 @@
 package com.flowable.springboot.bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 用户类
  */
@@ -11,7 +8,6 @@ public class UserInfoEntity extends BaseEntity {
     private String userName;
     private String userCode;
     private String password;
-    private List<RoleBean> roles = new ArrayList<>();
 
 
     public String getUserId() {
@@ -47,11 +43,4 @@ public class UserInfoEntity extends BaseEntity {
         this.password = password;
     }
 
-    public List<RoleBean> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<RoleBean> roles) {
-        this.roles = roles;
-    }
 }
