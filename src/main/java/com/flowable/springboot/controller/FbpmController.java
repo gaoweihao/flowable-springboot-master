@@ -1,5 +1,7 @@
 package com.flowable.springboot.controller;
 
+import com.codingapi.txlcn.tc.annotation.DTXPropagation;
+import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import com.flowable.springboot.requestBean.*;
 import com.flowable.springboot.responseBean.BaseResponse;
 import com.flowable.springboot.service.FbpmService;
@@ -7,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +25,8 @@ public class FbpmController {
 
     @ApiOperation(value="fbpm批量启动流程")
     @PatchMapping("/fbpm-batch-process-instances")
+    @Transactional
+    @LcnTransaction(propagation = DTXPropagation.REQUIRED)
     public BaseResponse batchProcessInstances(@RequestBody ProcessStartQuery processStart) throws IllegalAccessException {
 
         //批量启动远程接口
@@ -34,6 +39,8 @@ public class FbpmController {
 
     @ApiOperation(value="fbpm批量审核流程")
     @PatchMapping("/fbpm-batch-process-approve")
+    @Transactional
+    @LcnTransaction(propagation = DTXPropagation.REQUIRED)
     public BaseResponse batchProcessApprove(@RequestBody ProcessApproveQuery processApprove){
         //批量启动远程接口
         String url = taskUrl+"/api/runtime/approve-batch-tasks-new";
@@ -44,6 +51,8 @@ public class FbpmController {
 
     @ApiOperation(value="fbpm批量驳回流程")
     @PatchMapping("/fbpm-batch-process-back")
+    @Transactional
+    @LcnTransaction(propagation = DTXPropagation.REQUIRED)
     public BaseResponse batchProcessBack(@RequestBody ProcessBackQuery processBack){
         //批量启动远程接口
         String url = taskUrl+"/api/runtime/back-batch-tasks";
@@ -54,6 +63,8 @@ public class FbpmController {
 
     @ApiOperation(value="fbpm批量撤销流程")
     @PatchMapping("/fbpm-batch-process-cancel")
+    @Transactional
+    @LcnTransaction(propagation = DTXPropagation.REQUIRED)
     public BaseResponse batchProcessCancel(@RequestBody ProcessCancelQuery processCancel){
         //批量启动远程接口
         String url = taskUrl+"/api/runtime/batch-cancel-tasks";
@@ -64,6 +75,8 @@ public class FbpmController {
 
     @ApiOperation(value="fbpm查询待办任务接口")
     @PatchMapping("/fbpm-select-task-list-state/{state}")
+    @Transactional
+    @LcnTransaction(propagation = DTXPropagation.REQUIRED)
     public BaseResponse selectTaskListByState(@PathVariable String state,@RequestBody TaskStateQuery taskStat){
         //批量启动远程接口
         String url = taskUrl+"/api/runtime/fbpm-user-state-task/taskList/"+state;
@@ -74,6 +87,8 @@ public class FbpmController {
 
     @ApiOperation(value="fbpm查询已办任务接口")
     @PatchMapping("/fbpm-select-task-finish-list/state")
+    @Transactional
+    @LcnTransaction(propagation = DTXPropagation.REQUIRED)
     public BaseResponse selectTaskFinishList(@PathVariable String state,@RequestBody TaskFinishQuery taskFinish){
         //批量启动远程接口
         String url = taskUrl+"/api/runtime/fbpm-user-finished-task/finishedTaskList";
