@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("userInfoService")
-public class UserInfoServiceImpl implements UserInfoService {
+public class UserInfoServiceImpl extends BaseServiceImpl implements UserInfoService {
 
     @Autowired
     private UserInfoDao userInfoDao;
