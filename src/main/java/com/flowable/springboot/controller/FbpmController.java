@@ -1,13 +1,17 @@
 package com.flowable.springboot.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.flowable.springboot.requestBean.*;
 import com.flowable.springboot.responseBean.BaseResponse;
+import com.flowable.springboot.responseBean.FbpmResponseEntity;
 import com.flowable.springboot.service.FbpmService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/fbpm")
@@ -23,11 +27,9 @@ public class FbpmController {
     @ApiOperation(value="fbpm批量启动流程")
     @PatchMapping("/fbpm-batch-process-instances")
     public BaseResponse batchProcessInstances(@RequestBody ProcessStartQuery processStart) throws IllegalAccessException {
-
         //批量启动远程接口
-        String url = taskUrl+"/api/runtime/fbpm-process-instances-batchCreateInstance";
+        String url = taskUrl+"/api/fbpm/process-instances/batch-create";
         BaseResponse response = fbpmService.batchProcessInstance(url,processStart);
-
         return response;
 
     }
@@ -36,8 +38,9 @@ public class FbpmController {
     @PatchMapping("/fbpm-batch-process-approve")
     public BaseResponse batchProcessApprove(@RequestBody ProcessApproveQuery processApprove){
         //批量启动远程接口
-        String url = taskUrl+"/api/runtime/approve-batch-tasks-new";
+        String url = taskUrl+"/api/fbpm/tasks/batch-approve";
         BaseResponse response = fbpmService.batchProcessApprove(url,processApprove);
+        List<FbpmResponseEntity> responseList = (List<FbpmResponseEntity>)response.getData();
         return response;
 
     }
@@ -46,8 +49,9 @@ public class FbpmController {
     @PatchMapping("/fbpm-batch-process-back")
     public BaseResponse batchProcessBack(@RequestBody ProcessBackQuery processBack){
         //批量启动远程接口
-        String url = taskUrl+"/api/runtime/back-batch-tasks";
+        String url = taskUrl+"/api/fbpm/tasks/batch-back";
         BaseResponse response = fbpmService.batchProcessBack(url,processBack);
+        List<FbpmResponseEntity> responseList = (List<FbpmResponseEntity>)response.getData();
         return response;
 
     }
@@ -56,8 +60,9 @@ public class FbpmController {
     @PatchMapping("/fbpm-batch-process-cancel")
     public BaseResponse batchProcessCancel(@RequestBody ProcessCancelQuery processCancel){
         //批量启动远程接口
-        String url = taskUrl+"/api/runtime/batch-cancel-tasks";
+        String url = taskUrl+"/api/fbpm/tasks/batch-cancel";
         BaseResponse response = fbpmService.batchProcessCancel(url,processCancel);
+        List<FbpmResponseEntity> responseList = (List<FbpmResponseEntity>)response.getData();
         return response;
 
     }
@@ -78,6 +83,18 @@ public class FbpmController {
         //批量启动远程接口
         String url = taskUrl+"/api/runtime/fbpm-user-finished-task/finishedTaskList";
         BaseResponse response = fbpmService.selectTaskFinishList(url,taskFinish);
+        return response;
+
+    }
+
+    @ApiOperation(value="fbpm废弃流程")
+    @DeleteMapping("/fbpm-delete-process/{businessKey}")
+    public BaseResponse deleteProcessByBusinessKey(@PathVariable String businessKey){
+        //批量启动远程接口
+        String url = taskUrl+"/api/fbpm/process-instances/delete-by-businesskey/"+businessKey;
+        BaseResponse response = fbpmService.deleteProcessByBusinessKey(url);
+        List<FbpmResponseEntity> responseList = (List<FbpmResponseEntity>)response.getData();
+
         return response;
 
     }

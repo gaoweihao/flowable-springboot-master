@@ -2,6 +2,9 @@ package com.flowable.springboot.service;
 
 import com.flowable.springboot.requestBean.*;
 import com.flowable.springboot.responseBean.BaseResponse;
+import com.flowable.springboot.responseBean.FbpmResponseEntity;
+
+import java.util.List;
 
 public interface FbpmService {
 
@@ -17,4 +20,5 @@ public interface FbpmService {
 
     BaseResponse selectTaskFinishList(String url, TaskFinishQuery taskFinish);
 
+    BaseResponse deleteProcessByBusinessKey(String url);
 }

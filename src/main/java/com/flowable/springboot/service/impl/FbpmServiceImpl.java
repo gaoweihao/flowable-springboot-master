@@ -1,20 +1,25 @@
 package com.flowable.springboot.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.codingapi.txlcn.tc.annotation.DTXPropagation;
 import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import com.codingapi.txlcn.tc.annotation.TxTransaction;
 import com.flowable.springboot.requestBean.*;
 import com.flowable.springboot.responseBean.BaseResponse;
+import com.flowable.springboot.responseBean.FbpmResponseEntity;
 import com.flowable.springboot.responseBean.ProcTaskInfo;
 import com.flowable.springboot.service.FbpmService;
 import com.flowable.springboot.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("fbpmService")
 public class FbpmServiceImpl implements FbpmService {
@@ -37,7 +42,16 @@ public class FbpmServiceImpl implements FbpmService {
     @Transactional
     @LcnTransaction(propagation = DTXPropagation.REQUIRED)
     public BaseResponse batchProcessInstance(String url, ProcessStartQuery processStart) {
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        HttpEntity<ProcessStartQuery> requestEntity = new HttpEntity<>(processStart, headers);
+//        ResponseEntity<BaseResponse<List<FbpmResponseEntity>>> result =
+//                restTemplate.exchange(url, HttpMethod.POST,requestEntity, new ParameterizedTypeReference<BaseResponse<List<FbpmResponseEntity>>>(){});
+//        BaseResponse<List<FbpmResponseEntity>> response = result.getBody();
+
         BaseResponse response = restTemplate.postForObject(url,JSON.toJSON(processStart),BaseResponse.class);
+//        BaseResponse<List<FbpmResponseEntity>> s =
+//                restTemplate.execute(url, HttpMethod.POST, requestEntity, BaseResponse<List<FbpmResponseEntity>>);
         return response;
     }
 
@@ -141,5 +155,22 @@ public class FbpmServiceImpl implements FbpmService {
         response.setCode(200);
         response.setData(procTaskInfo);
         return response;
+    }
+
+    /**
+     * 根据流程实例废弃流程
+     *
+     * @param url        远程访问接口的路径
+     * @return baseResponse
+     */
+    @Override
+    public BaseResponse deleteProcessByBusinessKey(String url) {
+
+        ResponseEntity<BaseResponse> resp =  restTemplate.exchange(url, HttpMethod.DELETE,null,BaseResponse.class);
+        if(resp.getStatusCode().value() == 200){
+            BaseResponse response = resp.getBody();
+            System.out.println(response.getMsg());
+        }
+        return null;
     }
 }

@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * swagger 配置类
  *
- * 访问地址: http://localhost:8080/flowable-master/swagger-ui.html
+ * 访问地址: http://localhost:8077/flowable-master/swagger-ui.html
  * */
 @Configuration
 @EnableSwagger2

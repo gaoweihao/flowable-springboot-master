@@ -10,23 +10,62 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/test_flowable?serverTimezone=UTC&characterEncoding=UTF8
     username: root
     password: 123456
+  redis:
+    database: 0
+    #host: 192.168.100.31
+    host: 127.0.0.1
+    post: 6379
+    password:
 
 mybatis:
   mapper-locations: classpath*:com/flowable/springboot/mapper/*.xml
 
 tx-lcn:
   client:
-    manager-address: 127.0.0.1:8070
+    #manager-address: 127.0.0.1:8070
+    manager-address: localhost:8070
 
 logging:
   level:
     com.flowable.springboot.dao: debug
 
 #配置的请求路径ip
-task_url: http://localhost:8079/fbpm-process
+task_url: http://fbpm-process/fbpm-process   #http://localhost:8079/fbpm-process
 
 #启用 flowable 端点
 management:
   endpoint:
     flowable:
       enabled: true
+
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://192.168.100.31:8761/eureka
+#tx-lcn:
+#  client:
+#    manager-address: 192.168.100.31:8070
+#    concurrent-level: 160
+#  message:
+#    netty:
+#      attr-delay-time: 1000
+#      wait-time: 3000
+#      reconnect-count: 5
+#      reconnect-delay: 6000
+#      channel-pool-size: 1
+#      workgroup-thread-size: 1
+#  springcloud:
+   # loadbalance:
+   #   enabled: true
+#  logger:
+#    enabled: false
+   #dbtype: oracle
+#    only-error: false
+#    driver-class-name: dm.jdbc.driver.DmDriver
+#    jdbc-url: jdbc:dm://192.168.100.32:5236/ufgovdb
+#    username: SHWARLCN0612
+#    password: ufgov1234
+#crux:
+# txlcn:
+#    enable: true
