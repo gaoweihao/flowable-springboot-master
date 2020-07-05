@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="crux" />
+      <option name="name" value="crux" />
+      <option name="url" value="http://maven.ufgov.com.cn/nexus/content/groups/crux" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="dfcloudmaven" />
+      <option name="name" value="dfcloudmaven" />
+      <option name="url" value="http://maven.ufgov.com.cn/nexus/content/groups/dfcloud" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="cruxmaven" />
+      <option name="name" value="cruxmaven" />
+      <option name="url" value="http://maven.ufgov.com.cn/nexus/content/groups/crux" />
+    </remote-repository>
+  </component>
+</project>

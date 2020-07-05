@@ -13,21 +13,20 @@ spring:
   redis:
     database: 0
     #host: 192.168.100.31
-    host: 127.0.0.1
+    host: 192.168.100.43
     post: 6379
     password:
 
 mybatis:
   mapper-locations: classpath*:com/flowable/springboot/mapper/*.xml
 
-tx-lcn:
-  client:
-    #manager-address: 127.0.0.1:8070
-    manager-address: localhost:8070
-
 logging:
   level:
     com.flowable.springboot.dao: debug
+    #com: debug
+    org.flowable.engine.impl.persistence.entity: DEBUG
+    org.flowable.task.service.impl.persistence.entity: debug
+
 
 #配置的请求路径ip
 task_url: http://fbpm-process/fbpm-process   #http://localhost:8079/fbpm-process
@@ -36,16 +35,16 @@ task_url: http://fbpm-process/fbpm-process   #http://localhost:8079/fbpm-process
 management:
   endpoint:
     flowable:
-      enabled: true
+      enabled: false
 
-#eureka:
-#  client:
-#    register-with-eureka: true
-#    service-url:
-#      defaultZone: http://192.168.100.31:8761/eureka
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://192.168.100.42:8762/eureka
 #tx-lcn:
 #  client:
-#    manager-address: 192.168.100.31:8070
+#    manager-address: 192.168.100.31:8070 #192.168.100.42:8762
 #    concurrent-level: 160
 #  message:
 #    netty:
@@ -66,6 +65,3 @@ management:
 #    jdbc-url: jdbc:dm://192.168.100.32:5236/ufgovdb
 #    username: SHWARLCN0612
 #    password: ufgov1234
-#crux:
-# txlcn:
-#    enable: true
