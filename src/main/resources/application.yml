@@ -26,6 +26,8 @@ logging:
     #com: debug
     org.flowable.engine.impl.persistence.entity: DEBUG
     org.flowable.task.service.impl.persistence.entity: debug
+    org.flowable.identitylink.service.impl.persistence.entity: debug
+    org.flowable.idm.engine.impl.persistence.entity: debug
 
 
 #配置的请求路径ip

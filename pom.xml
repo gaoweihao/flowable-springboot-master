@@ -69,7 +69,7 @@
         <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-spring-boot-starter</artifactId>
-            <version>6.4.1</version>
+            <version>6.4.2</version>
         </dependency>
 
         <dependency>
@@ -119,6 +119,12 @@
         <!-- swagger 依赖结束-->
 
         <!-- lcn 依赖开始-->
+        <dependency>
+            <groupId>com.crux</groupId>
+            <artifactId>crux-txlcn</artifactId>
+            <version>3.0.4</version>
+        </dependency>
+
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
