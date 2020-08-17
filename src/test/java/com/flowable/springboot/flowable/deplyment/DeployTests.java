@@ -1,4 +1,4 @@
-package com.flowable.springboot.deplyment;
+package com.flowable.springboot.flowable.deplyment;
 
 import com.flowable.springboot.util.StringUtil;
 import org.apache.commons.io.FileUtils;

@@ -16,6 +16,11 @@ spring:
     host: 192.168.100.43
     post: 6379
     password:
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      database: mongodb-test
 
 mybatis:
   mapper-locations: classpath*:com/flowable/springboot/mapper/*.xml
@@ -28,6 +33,8 @@ logging:
     org.flowable.task.service.impl.persistence.entity: debug
     org.flowable.identitylink.service.impl.persistence.entity: debug
     org.flowable.idm.engine.impl.persistence.entity: debug
+    #org.flowable.job.service.impl.persistence.entity: debug
+    org.flowable.variable.service.impl.persistence.entity: debug
 
 
 #配置的请求路径ip
@@ -41,7 +48,7 @@ management:
 
 eureka:
   client:
-    register-with-eureka: true
+    register-with-eureka: false
     service-url:
       defaultZone: http://192.168.100.42:8762/eureka
 #tx-lcn:

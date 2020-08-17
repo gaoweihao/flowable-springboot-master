@@ -1,6 +1,6 @@
-package com.flowable.springboot.deplyment;
+package com.flowable.springboot.flowable.deplyment;
 
-import com.flowable.springboot.cascade.DeleteProcessInstanceCascadeCmd;
+import com.flowable.springboot.flowable.cascade.DeleteProcessInstanceCascadeCmd;
 import org.flowable.common.engine.impl.identity.Authentication;
 import org.flowable.engine.*;
 import org.flowable.engine.history.HistoricActivityInstance;

@@ -1,5 +1,7 @@
 package com.flowable.springboot.bean;
 
+import java.util.List;
+
 /**
  * 用户类
  */
@@ -8,6 +10,7 @@ public class UserInfoEntity extends BaseEntity {
     private String userName;
     private String userCode;
     private String password;
+    private List<ProcTaskInfo> taskList;
 
 
     public String getUserId() {
@@ -43,4 +46,11 @@ public class UserInfoEntity extends BaseEntity {
         this.password = password;
     }
 
+    public List<ProcTaskInfo> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<ProcTaskInfo> taskList) {
+        this.taskList = taskList;
+    }
 }

@@ -33,4 +33,17 @@
       WHERE user_code = #{userCode}
     </select>
 
+    <insert id="saveList" databaseId="oracle">
+        INSERT ALL
+        <foreach collection="list" item="user" index="index">
+            into sys_user_info (id,user_name,user_code,password) VALUES(
+            #{user.id},
+            #{user.userName},
+            #{user.userCode},
+            #{user.password}
+            )
+        </foreach>
+        SELECT * FROM dual
+    </insert>
+
 </mapper>

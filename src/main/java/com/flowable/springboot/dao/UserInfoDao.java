@@ -15,4 +15,6 @@ public interface UserInfoDao {
     UserInfoEntity selectByUserId(String userId);
 
     UserInfoEntity findByUserCode(String userCode);
+
+    void saveList(List<UserInfoEntity> userList);
 }

@@ -1,4 +1,4 @@
-package com.flowable.springboot.cascade;
+package com.flowable.springboot.flowable.cascade;
 
 import org.flowable.common.engine.impl.AbstractEngineConfiguration;
 import org.flowable.common.engine.impl.interceptor.Command;

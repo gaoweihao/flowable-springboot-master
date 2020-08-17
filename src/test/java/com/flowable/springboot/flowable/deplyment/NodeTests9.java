@@ -1,4 +1,4 @@
-package com.flowable.springboot.deplyment;
+package com.flowable.springboot.flowable.deplyment;
 
 import org.flowable.engine.*;
 import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;

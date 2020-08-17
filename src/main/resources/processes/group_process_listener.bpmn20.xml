@@ -4,7 +4,7 @@
     <startEvent id="startEvent1"></startEvent>
     <userTask id="sid-CE66DE56-F692-4CD6-B354-1DD78560EDF6" name="申请">
       <extensionElements>
-        <flowable:taskListener event="create" class="com.flowable.springboot.listener.GroupTaskListenerImpl"></flowable:taskListener>
+        <flowable:taskListener event="create" class="com.flowable.springboot.flowable.listener.GroupTaskListenerImpl"></flowable:taskListener>
       </extensionElements>
     </userTask>
     <sequenceFlow id="sid-496D9572-46F2-42D9-ACD1-73611CBA59F2" sourceRef="startEvent1" targetRef="sid-CE66DE56-F692-4CD6-B354-1DD78560EDF6"></sequenceFlow>

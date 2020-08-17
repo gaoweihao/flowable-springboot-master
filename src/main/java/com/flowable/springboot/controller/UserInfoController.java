@@ -7,8 +7,11 @@ import com.flowable.springboot.responseBean.ProcEventRequestObj;
 import com.flowable.springboot.service.UserInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/userInfo")
@@ -20,7 +23,7 @@ public class UserInfoController {
 
     @PatchMapping("/user")
     @ApiOperation("保存用户信息")
-    public void save(UserInfoEntity user) {
+    public void save(@RequestBody UserInfoEntity user) {
         userInfoService.save(user);
     }
 
@@ -46,6 +49,14 @@ public class UserInfoController {
         System.out.println("事件注册测试---------------------------Post");
         System.out.println(JSON.toJSONString(requestObj));
         System.out.println("事件注册测试---------------------------post");
+        return null;
+    }
+
+    @PostMapping("/save-list")
+    @ApiOperation(value = "批量保存用户")
+    public BaseResponse saveList(@RequestBody List<UserInfoEntity> userList) {
+        userInfoService.saveList(userList);
+        System.out.println("---------------------------------------------------------");
         return null;
     }
 }
