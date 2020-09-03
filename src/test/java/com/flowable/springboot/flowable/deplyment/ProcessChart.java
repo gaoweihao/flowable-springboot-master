@@ -1,8 +1,10 @@
 package com.flowable.springboot.flowable.deplyment;
 
+import com.flowable.springboot.flowable.diagramGenerator.MyProcessDiagramGenerator;
 import org.apache.commons.io.FileUtils;
 import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.engine.*;
+import org.flowable.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.repository.DeploymentBuilder;
@@ -50,7 +52,9 @@ public class ProcessChart {
                 .setActivityFontName("宋体")
                 .setLabelFontName("宋体")
                 .setAnnotationFontName("宋体")
-                .setAsyncExecutorActivate(true);
+                .setAsyncExecutorActivate(true)
+                //自定义图片生成器
+                .setProcessDiagramGenerator(new MyProcessDiagramGenerator());
         processEngine = processEngineConfiguration.buildProcessEngine();//ProcessEngines.getDefaultProcessEngine();
         repositoryService = processEngine.getRepositoryService();
         runtimeService = processEngine.getRuntimeService();
@@ -169,5 +173,15 @@ public class ProcessChart {
                         scaleFactor,
                         drawSequenceFlowNameWithNoLabelDI);
         FileUtils.copyInputStreamToFile(inputStream, new File(path));
+    }
+
+    /**
+     * 生成高亮图片
+     * */
+    @Test
+    public void getProcessDiagramGenerator() throws IOException {
+        ProcessEngineConfigurationImpl processEngineConfiguration = (ProcessEngineConfigurationImpl)processEngine.getProcessEngineConfiguration();
+        ProcessDiagramGenerator processDiagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
+        System.out.println(processDiagramGenerator);
     }
 }

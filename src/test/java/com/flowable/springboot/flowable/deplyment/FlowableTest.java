@@ -8,6 +8,7 @@ import org.flowable.engine.repository.DeploymentBuilder;
 import org.flowable.engine.runtime.Execution;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
+import org.flowable.task.api.history.HistoricTaskInstance;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -146,18 +147,10 @@ public class FlowableTest {
      */
     @Test
     public void saveExecutionEntity() {
-        ExecutionEntityImpl executionEntity = new ExecutionEntityImpl();
-        executionEntity.setId("12");
-        executionEntity.setProcessInstanceId("12");
-        executionEntity.setParentId("23we");
-        executionEntity.setProcessDefinitionId("23we");
-        executionEntity.setRootProcessInstanceId("23we");
-        executionEntity.setActivityId("23we");
-        executionEntity.setSuspensionState(1);
-        executionEntity.setCountEnabled(true);
-        executionEntity.setStartTime(new Date());
-        executionEntity.setActive(false);
-        executionEntity.setScope(false);
+        List<HistoricTaskInstance> list = historyService.createHistoricTaskInstanceQuery().taskId("").list();
+
+
+
 
     }
 }
