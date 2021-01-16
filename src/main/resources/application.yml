@@ -1,5 +1,5 @@
 server:
-  port: 8077
+  port: 8075
   servlet:
     context-path: /flowable-master
 spring:
@@ -23,26 +23,9 @@ spring:
       host: 127.0.0.1
       port: 27017
       database: mongodb-test
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: guest
-    password: guest
 
 mybatis:
   mapper-locations: classpath*:com/flowable/springboot/mapper/*.xml
-
-#logging:
-  #level:
-    #com.flowable.springboot.dao: debug
-    #com: debug
-    #org.flowable.engine.impl.persistence.entity: DEBUG
-    #org.flowable.task.service.impl.persistence.entity: debug
-   # org.flowable.identitylink.service.impl.persistence.entity: debug
-    #org.flowable.idm.engine.impl.persistence.entity: debug
-    #org.flowable.job.service.impl.persistence.entity: debug
-    #org.flowable.variable.service.impl.persistence.entity: debug
-
 
 #配置的请求路径ip
 task_url: http://fbpm-process/fbpm-process   #http://localhost:8079/fbpm-process
@@ -52,32 +35,3 @@ management:
   endpoint:
     flowable:
       enabled: false
-
-eureka:
-  client:
-    register-with-eureka: false
-    service-url:
-      defaultZone: http://192.168.100.42:8762/eureka
-#tx-lcn:
-#  client:
-#    manager-address: 192.168.100.31:8070 #192.168.100.42:8762
-#    concurrent-level: 160
-#  message:
-#    netty:
-#      attr-delay-time: 1000
-#      wait-time: 3000
-#      reconnect-count: 5
-#      reconnect-delay: 6000
-#      channel-pool-size: 1
-#      workgroup-thread-size: 1
-#  springcloud:
-   # loadbalance:
-   #   enabled: true
-#  logger:
-#    enabled: false
-   #dbtype: oracle
-#    only-error: false
-#    driver-class-name: dm.jdbc.driver.DmDriver
-#    jdbc-url: jdbc:dm://192.168.100.32:5236/ufgovdb
-#    username: SHWARLCN0612
-#    password: ufgov1234

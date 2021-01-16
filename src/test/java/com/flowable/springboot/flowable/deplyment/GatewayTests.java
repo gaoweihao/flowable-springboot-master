@@ -1,12 +1,10 @@
 package com.flowable.springboot.flowable.deplyment;
 
-import freemarker.core.JSONOutputFormat;
 import org.flowable.engine.*;
 import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.repository.DeploymentBuilder;
 import org.flowable.engine.runtime.ProcessInstance;
-import org.flowable.job.api.Job;
 import org.flowable.task.api.Task;
 import org.junit.Before;
 import org.junit.Test;
@@ -115,7 +113,7 @@ public class GatewayTests {
     public void startProcessInstanceByKey() {
         String processDefinitionKey = "Parallel_Gateway";
         Map<String, Object> variables = new HashMap<>();
-    //    variables.put("day", 6);
+        //    variables.put("day", 6);
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey, variables);
         System.out.println(processInstance.getId() + " : " + processInstance.getActivityId());
         List<Task> taskList = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();

@@ -373,4 +373,22 @@ public class RuntimeTests {
         System.out.println("---------------------------------------------------");
     }
 
+    /**
+     * 调岗问题
+     */
+    @Test
+    public void createChangeActivityStateBuilder() {
+        String processInstanceId = "55001";
+        Map<String, Object> variables = new HashMap();
+//        runtimeService.createChangeActivityStateBuilder()
+//                .processVariables(variables)
+//                .localVariables(currentNodeId,variables)
+//                .processInstanceId(procInstId)
+//                .moveActivityIdTo(currentNodeId,targetNodeId)
+//                .changeState();
+        System.out.println("---------------------------------------------------");
+    }
+
+
+
 }

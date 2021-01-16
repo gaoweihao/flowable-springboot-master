@@ -3,6 +3,7 @@ package com.flowable.springboot.service;
 import com.flowable.springboot.bean.UserInfoEntity;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserInfoService{
 
@@ -13,4 +14,6 @@ public interface UserInfoService{
     UserInfoEntity findByUserCode(String username);
 
     void saveList(List<UserInfoEntity> userList);
+
+    Map<String,UserInfoEntity> findUserInfoMap();
 }

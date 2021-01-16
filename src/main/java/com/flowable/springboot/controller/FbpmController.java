@@ -1,6 +1,4 @@
 package com.flowable.springboot.controller;
-
-import com.alibaba.fastjson.JSON;
 import com.flowable.springboot.requestBean.*;
 import com.flowable.springboot.responseBean.BaseResponse;
 import com.flowable.springboot.responseBean.FbpmResponseEntity;

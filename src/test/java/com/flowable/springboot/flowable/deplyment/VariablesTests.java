@@ -123,6 +123,8 @@ public class VariablesTests {
             System.out.println(value);
         });
         Map<String, Object> variablesLocal = taskService.getVariablesLocal(taskId);
+
+
     }
 
 }

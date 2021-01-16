@@ -1,6 +1,7 @@
 package com.flowable.springboot.flowable.deplyment;
 
 import org.flowable.common.engine.api.history.HistoricData;
+import org.flowable.common.engine.impl.history.HistoryLevel;
 import org.flowable.engine.*;
 import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.engine.history.HistoricProcessInstance;
@@ -56,6 +57,7 @@ public class HistoryTests {
         processEngineConfiguration.setActivityFontName("宋体");
         processEngineConfiguration.setLabelFontName("宋体");
         processEngineConfiguration.setAnnotationFontName("宋体");
+        //processEngineConfiguration.setHistoryLevel(HistoryLevel.NONE);
         //processEngineConfiguration.setAsyncExecutorActivate(true);
         //processEngineConfiguration.setAsyncHistoryExecutorActivate(true);
         //id生成器 增加1000

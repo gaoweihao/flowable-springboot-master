@@ -7,16 +7,15 @@ import com.flowable.springboot.responseBean.ProcEventRequestObj;
 import com.flowable.springboot.service.UserInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-//import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/userInfo")
-@Api(value = "UserInfoController", tags = "用户管理")
-public class UserInfoController {
+@RequestMapping("/userInfo-lcn")
+@Api(value = "UserInfoController-lcn", tags = "用户管理-分布式事务")
+public class UserInfoLcnController {
 
     @Autowired
     private UserInfoService userInfoService;
@@ -45,18 +44,9 @@ public class UserInfoController {
 
     @PostMapping("/event-info-post")
     @ApiOperation(value = "事件注册实测")
-    public BaseResponse eventInfoPost(@RequestBody List<ProcEventRequestObj> objList) {
+    public BaseResponse eventInfoPost(@RequestBody ProcEventRequestObj requestObj) {
         System.out.println("事件注册测试---------------------------Post");
-        System.out.println(JSON.toJSONString(objList));
-        System.out.println("事件注册测试---------------------------post");
-        return null;
-    }
-
-    @PostMapping("/event-info-post-test")
-    @ApiOperation(value = "事件注册实测")
-    public BaseResponse eventInfoPostTest(@RequestBody List<ProcEventRequestObj> objList) {
-        System.out.println("事件注册测试---------------------------Post");
-        System.out.println(JSON.toJSONString(objList));
+        System.out.println(JSON.toJSONString(requestObj));
         System.out.println("事件注册测试---------------------------post");
         return null;
     }

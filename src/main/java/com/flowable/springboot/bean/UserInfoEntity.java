@@ -1,6 +1,7 @@
 package com.flowable.springboot.bean;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 用户类
@@ -11,7 +12,6 @@ public class UserInfoEntity extends BaseEntity {
     private String userCode;
     private String password;
     private List<ProcTaskInfo> taskList;
-
 
     public String getUserId() {
 
@@ -52,5 +52,15 @@ public class UserInfoEntity extends BaseEntity {
 
     public void setTaskList(List<ProcTaskInfo> taskList) {
         this.taskList = taskList;
+    }
+
+    public static void main(String[] args) throws IllegalAccessException, InstantiationException {
+        UserInfoEntity user = new UserInfoEntity();
+        user.setId(UUID.randomUUID().toString());
+        user.setUserName("张三");
+        user.setUserCode("23423");
+        Class clazz = user.getClass();
+        UserInfoEntity userInfoEntity = (UserInfoEntity) clazz.newInstance();
+
     }
 }
